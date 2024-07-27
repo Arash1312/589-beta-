@@ -341,3 +341,10 @@ jobs:
           mkdir build && cd build
           cmake .. && make
           make install DESTDIR=../../kcov-build
+--------------
+- name: Install sccache Ubuntu
+        if: matrix.os == 'ubuntu-latest'
+        env:
+          LINK: https://github.com/mozilla/sccache/releases/download
+          SCCACHE_VERSION: v0.2.15
+        run: |
