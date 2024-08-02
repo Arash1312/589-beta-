@@ -341,3 +341,7 @@ jobs:
           mkdir build && cd build
           cmake .. && make
           make install DESTDIR=../../kcov-build
+ path: /home/runner/.cache/sccache
+          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ubuntu-sccache-
+            
