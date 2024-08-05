@@ -22,7 +22,20 @@ jobs:
             sccache-path: /home/runner/.cache/sccache
           - os: macos-latest
             sccache-path: /Users/runner/Library/Caches/Mozilla.sccache
-
+   - name: Stop sccache server
+        run: sccache --stop-server || true
+- name: Generate coverage report
+        run: |
+          wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
+          tar xzf master.tar.gz
+          cd kcov-master
+          mkdir build && cd build
+          cmake .. && make
+          make install DESTDIR=../../kcov-build
+ path: /home/runner/.cache/sccache
+          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ubuntu-sccache-
+            
     env:
       RUSTC_WRAPPER: sccache
       SCCACHE_CACHE_SIZE: 2G
@@ -331,17 +344,4 @@ jobs:
       - name: Print sccache stats
         run: sccache --show-stats
         
-      - name: Stop sccache server
-        run: sccache --stop-server || true
-- name: Generate coverage report
-        run: |
-          wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-          tar xzf master.tar.gz
-          cd kcov-master
-          mkdir build && cd build
-          cmake .. && make
-          make install DESTDIR=../../kcov-build
- path: /home/runner/.cache/sccache
-          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ubuntu-sccache-
-            
+   
