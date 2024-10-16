@@ -194,7 +194,17 @@ jobs:
       - name: Test
         run: |
           cargo test --all
+env:
+  RUST_BACKTRACE: 1
 
+jobs:
+  test-package:
+    name: Test Package ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest, ubuntu-latest]
+        include:
   test-docs: 
     name: Test Docs
     runs-on: ubuntu-latest
