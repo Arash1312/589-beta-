@@ -85,7 +85,12 @@ on:
           profile: minimal
           toolchain: stable
           override: true
-
+name: CI
+on:
+  pull_request:
+    push:
+      branches:
+        - testnet3
       - name: Cache cargo registry
         uses: actions/cache@v2
         continue-on-error: false
