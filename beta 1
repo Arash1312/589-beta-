@@ -4,12 +4,6 @@ sudo apt install git screen python3 python3-pip
 pip3 install web3
 #OR
 pip install web3
-
-
-name: CI
-on:
-  pull_request:
-    push:
       branches:
         - testnet3
       paths-ignore:
@@ -17,7 +11,10 @@ on:
         - 'documentation/**'
 env:
   RUST_BACKTRACE: 1
-
+name: CI
+on:
+  pull_request:
+    push:
 jobs:
   test-package:
     name: Test Package ${{ matrix.os }}
