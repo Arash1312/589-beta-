@@ -22,7 +22,10 @@ jobs:
     strategy:
       matrix:
         os: [macOS-latest, ubuntu-latest]
-      
+      env:
+  RUST_BACKTRACE: 1
+name: CI
+on:
         run: sccache --stop-server || true
 - name: Generate coverage report
         run: |
