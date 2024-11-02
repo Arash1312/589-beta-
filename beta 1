@@ -26,6 +26,9 @@ jobs:
   RUST_BACKTRACE: 1
 name: CI
 on:
+  paths-ignore:
+        - 'docs/**'
+        - 'documentation/**'
         run: sccache --stop-server || true
 - name: Generate coverage report
         run: |
@@ -43,6 +46,9 @@ on:
           cd kcov-master
           mkdir build && cd build
     env:
+  paths-ignore:
+        - 'docs/**'
+        - 'documentation/**'
       RUSTC_WRAPPER: sccache
       SCCACHE_CACHE_SIZE: 2G
       SCCACHE_DIR: ${{ matrix.sccache-path }}
