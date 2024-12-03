@@ -117,7 +117,14 @@ on:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
-            
+          pip3 install web3
+#OR
+pip install web3
+      branches:
+        - testnet3
+      paths-ignore:
+        - 'docs/**'
+        - 'documentation/**'  
       - name: Save sccache
         uses: actions/cache@v2
         continue-on-error: false
