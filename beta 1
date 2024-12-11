@@ -119,6 +119,13 @@ on:
             ${{ runner.os }}-cargo-
           pip3 install web3
 #OR
+#OR
+pip install web3
+      branches:
+        - testnet3
+      paths-ignore:
+        - 'docs/**'
+        - 'documentat
 pip install web3
       branches:
         - testnet3
