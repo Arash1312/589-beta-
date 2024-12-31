@@ -92,7 +92,11 @@ pip install web3
         if: matrix.os == 'macos-latest'
         run: |
           brew install sccache
-  include:
+  include:env:
+  RUST_BACKTRACE: 1
+name: CI
+on:
+  pull_re
           - os: ubuntu-latest
             sccache-path: /home/runner/.cache/sccache
           - os: macos-latest
