@@ -309,32 +309,7 @@ jobs:
           toolchain: stable
           override: true
 
-      - name: Save sccache
-        uses: actions/cache@v2
-        continue-on-error: false
-        with:
-          path: /home/runner/.cache/sccache
-          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ubuntu-sccache-
-            
-      - name: Start sccache server
-        run: sccache --start-server
-      
-      - name: Build Cargo Docs
-        env:
-          RUSTDOCFLAGS: "--enable-index-page -Zunstable-options"
-          RUSTC_BOOTSTRAP: "1"
-        run: |
-          cargo doc --no-deps --document-private-items --workspace
-          rm -rf ./tests
-      
-      - name: Print sccache stats
-        run: sccache --show-stats
-        
-      - name: Stop sccache server
-        run: sccache --stop-server || true
-
-  codecov:
+   
     name: Code Coverage
     runs-on: ubuntu-latest
     env:
@@ -403,20 +378,11 @@ jobs:
           sudo apt-get update
           sudo apt-get -y install binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev
 
-      - name: Generate coverage report
-        run: |
-          wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-          tar xzf master.tar.gz
-          cd kcov-master
-          mkdir build && cd build
-          cmake .. && make
-          make install DESTDIR=../../kcov-build
-          cd ../..
-          rm -rf kcov-master
-          for file in target/debug/deps/*-*; do if [[ "$file" != *\.* ]]; then mkdir -p "target/cov/$(basename $file)"; ./kcov-build/usr/local/bin/kcov --exclude-pattern=/.cargo,/usr/lib --exclude-region='@kcov_skip(start):@kcov_skip(end)' --verify "target/cov/$(basename $file)" "$file"; fi done
- --show-stats
-        
-    with:  - testnet3
+      branches:
+        - testnet3
+      paths-ignore:
+        - 'docs/**'
+        - 'documentation
       paths-ignore:
         - 'docs/**'
         - 'documentation/**'
