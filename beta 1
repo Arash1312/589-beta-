@@ -1,14 +1,5 @@
 sudo apt-get update
-sudo apt install git screen python3 python3-pip
 
-pip3 install web3
-#OR
-pip install web3
-      branches:
-        - testnet3
-      paths-ignore:
-        - 'docs/**'
-        - 'documentation/**'
 env:
   RUST_BACKTRACE: 1
 name: CI
@@ -125,7 +116,16 @@ on:
           restore-keys: |
             ${{ runner.os }}-cargo-
           pip3 install web3
+sudo apt install git screen python3 python3-pip
+
+pip3 install web3
 #OR
+pip install web3
+      branches:
+        - testnet3
+      paths-ignore:
+        - 'docs/**'
+        - 'documentation/**'
 #OR
 pip install web3
       branches:
