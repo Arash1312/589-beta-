@@ -9,12 +9,7 @@
 name: CI
 on:pip3 install web3
 #OR
-pip install web3
-      branches:
-        - testnet3
-      paths-ignore:
-        - 'docs/**'
-        - 'documentation/**'
+
   paths-ignore:
         - 'docs/**'
         - 'documentation/**'
@@ -72,7 +67,12 @@ github.com/mozilla/sccache/releases/download
           chmod +x $HOME/.local/bin/sccache
           echo "$HOME/.local/bin" >> $GITHUB_PATH
       pip3 install web3
-#OR
+pip install web3
+      branches:
+        - testnet3
+      paths-ignore:
+        - 'docs/**'
+        - 'documentation/**'
 pip install web3
       branches:
         - testnet3
