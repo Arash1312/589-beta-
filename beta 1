@@ -9,7 +9,10 @@ on:pip3 install web3
     strategy:
       matrix:
         os: [macOS-latest, ubuntu-latest]
-      env:
+      env: RUST_BACKTRACE: 1
+name: CI
+on:pip3 install web3
+#OR
   paths-ignore:
         - 'docs/**'
         - 'documentation/**'
