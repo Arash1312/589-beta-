@@ -1,15 +1,5 @@
 
-  RUST_BACKTRACE: 1
-name: CI
-on:pip3 install web3
-#OR
-:
-    name: Test Package ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macOS-latest, ubuntu-latest]
-      env: RUST_BACKTRACE: 1
+
 name: CI
 on:pip3 install web3
 #OR
@@ -312,15 +302,17 @@ jobs:
           toolchain: stable
           override: true
 
-   
-    name: Code Coverage
-    runs-on: ubuntu-latest
-    env:
-      RUSTC_BOOTSTRAP: 1
-      RUSTC_WRAPPER: sccache
-      SCCACHE_CACHE_SIZE: 2G
-      SCCACHE_DIR: /home/runner/.cache/sccache
-    steps:
+    RUST_BACKTRACE: 1
+name: CI
+on:pip3 install web3
+#OR
+:
+    name: Test Package ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest, ubuntu-latest]
+      env: RUST_BACKTRACE: 1
       - name: Checkout
         uses: actions/checkout@v1
 
