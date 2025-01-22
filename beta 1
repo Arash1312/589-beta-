@@ -1,14 +1,6 @@
 
 
-name: CI
-on:pip3 install web3
-#OR
-  paths-ignore:
-        - 'docs/**'
-        - 'documentation/**'
-        run: sccache --stop-server || true
-- name: Generate coverage report
-        run: |
+
           wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
           tar xzf master.tar.gz
           cd kcov-master
@@ -67,13 +59,15 @@ pip install web3
         - 'docs/**'
         - 'documentation/**'
 pip install web3
-      branches:
-        - testnet3
-      paths-ignore:
+      bname: CI
+on:pip3 install web3
+#OR
+  paths-ignore:
         - 'docs/**'
-        - 'documentation/**
-      - name: Install sccache Macos
-        if: matrix.os == 'macos-latest'
+        - 'documentation/**'
+        run: sccache --stop-server || true
+- name: Generate coverage report
+        run: |'macos-latest'
         run: |
           brew install sccache
   include:env:
