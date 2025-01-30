@@ -1,13 +1,4 @@
 
-
-
-          wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-          tar xzf master.tar.gz
-          cd kcov-master
-          mkdir build && cd build
-          cmake .. && make
-          make install DESTDIR=../../kcov-build
- path: /home/runner/.cache/sccache
           key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ubuntu-sccache-
                 wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
@@ -62,6 +53,13 @@ pip install web3
       bname: CI
 on:pip3 install web3
 #OR
+  wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
+          tar xzf master.tar.gz
+          cd kcov-master
+          mkdir build && cd build
+          cmake .. && make
+          make install DESTDIR=../../kcov-build
+ path: /home/runner/.cache/sccache
   paths-ignore:
         - 'docs/**'
         - 'documentation/**'
