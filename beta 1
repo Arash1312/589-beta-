@@ -1,10 +1,4 @@
 
-          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ubuntu-sccache-
-                wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-          tar xzf master.tar.gz
-          cd kcov-master
-          mkdir build && cd build
     env:
   paths-ignore:
         - 'docs/**'
@@ -19,6 +13,12 @@
 name: CI
 sudo apt-get update
 
+          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ubuntu-sccache-
+                wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
+          tar xzf master.tar.gz
+          cd kcov-master
+          mkdir build && cd build
 env:
   RUST_BACKTRACE: 1
 name: CI
