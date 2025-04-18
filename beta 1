@@ -10,16 +10,7 @@
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-name: CI
-sudo apt-get update
 
-          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: ubuntu-sccache-
-                wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-          tar xzf master.tar.gz
-          cd kcov-master
-          mkdir build && cd build
-env:
   RUST_BACKTRACE: 1
 name: CI
 on:
@@ -30,7 +21,16 @@ jobs:
   pull_request:
 sudo apt-get update
 sudo apt install git screen python3 python3-pip
+name: CI
+sudo apt-get update
 
+          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ubuntu-sccache-
+                wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
+          tar xzf master.tar.gz
+          cd kcov-master
+          mkdir build && cd build
+env:
 pip3 install web3
 #OR
 github.com/mozilla/sccache/releases/download
