@@ -5,8 +5,7 @@
         - 'documentation/**'
       RUSTC_WRAPPER: sccache
       SCCACHE_CACHE_SIZE: 2G
-      SCCACHE_DIR: ${{ matrix.sccache-path }}
-      # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back out
+      SCCACHE_DIR: ${{ matrix.sccache-path }}ut
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -26,6 +25,7 @@ sudo apt-get update
 sudo apt install git screen python3 python3-pip
 name: CI
 
+      # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back o
           key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ubuntu-sccache-
                 wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
