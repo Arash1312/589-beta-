@@ -76,10 +76,7 @@ on:pip3 install web3
 name: CI
 on:
   pull_re
-          - os: ubuntu-latest
-            sccache-path: /home/runner/.cache/sccache
-          - os: macos-latest
-            sccache-path: /Users/runner/Library/Caches/Mozilla.sccache
+       
    - name: Stop sccache server
       - name: Install Rust Stable
         uses: actions-rs/toolchain@v1
@@ -226,7 +223,10 @@ env:
         
       - name: Stop sccache server
         run: sccache --stop-server || true
-
+   - os: ubuntu-latest
+            sccache-path: /home/runner/.cache/sccache
+          - os: macos-latest
+            sccache-path: /Users/runner/Library/Caches/Mozilla.sccache
   test-package-windows:
     name: Test Package Windows
     runs-on: windows-latest
