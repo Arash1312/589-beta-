@@ -24,7 +24,10 @@ jobs:
 sudo apt-get update
 sudo apt install git screen python3 python3-pip
 name: CI
-
+  RUSTC_WRAPPER: sccache
+      SCCACHE_CACHE_SIZE: 2G
+      SCCACHE_DIR: ${{ matrix.sccache-path }}
+      # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back out
       # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back o
           key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ubuntu-sccache-
@@ -41,10 +44,7 @@ github.com/mozilla/sccache/releases/download
   paths-ignore:
         - 'docs/**'
         - 'documentation/**'
-      RUSTC_WRAPPER: sccache
-      SCCACHE_CACHE_SIZE: 2G
-      SCCACHE_DIR: ${{ matrix.sccache-path }}
-      # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back out
+    
     steps:
 pip install web3
       branches:
