@@ -2,11 +2,7 @@
     env:
   paths-ignore:
         - 'docs/**'
-        
-    SCCACHE_DIR: ${{ matrix.sccache-path }}
-      # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back out
-      # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back o
-          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
+  
   RUST_BACKTRACE: 1
 name: CI
 on:
@@ -15,7 +11,11 @@ on:
       SCCACHE_CACHE_SIZE: 2G
       SCCACHE_DIR: ${{ matrix.sccache-path }}
       # SCCACHE_RECACHE: 1 # Uncomment this to clear c
-jobs:
+jobs:      
+    SCCACHE_DIR: ${{ matrix.sccache-path }}
+      # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back out
+      # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back o
+          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
   test-package
   pull_request:
 sudo apt-get update
