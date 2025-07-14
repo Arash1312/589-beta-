@@ -6,12 +6,7 @@
   RUST_BACKTRACE: 1
 name: CI
 on:
-  pull_request:
-     RUSTC_WRAPPER: sccache
-      SCCACHE_CACHE_SIZE: 2G
-      SCCACHE_DIR: ${{ matrix.sccache-path }}
-      # SCCACHE_RECACHE: 1 # Uncomment this to clear c
-jobs:      
+ 
     SCCACHE_DIR: ${{ matrix.sccache-path }}
       # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back out
       # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back o
@@ -28,7 +23,12 @@ sudo apt install git screen python3 python3-pip
 name: CI
   RUSTC_WRAPPER: sccache
       SCCACHE_CACHE_SIZE: 2G
-  
+   pull_request:
+     RUSTC_WRAPPER: sccache
+      SCCACHE_CACHE_SIZE: 2G
+      SCCACHE_DIR: ${{ matrix.sccache-path }}
+      # SCCACHE_RECACHE: 1 # Uncomment this to clear c
+jobs:      
           restore-keys: ubuntu-sccache-
                 wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
           tar xzf master.tar.gz
