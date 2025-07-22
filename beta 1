@@ -6,7 +6,15 @@
   RUST_BACKTRACE: 1
 name: CI
 on:
- 
+      tar xzf master.tar.gz
+          cd kcov-master
+          mkdir build && cd build
+env:
+pip3 install web3
+#OR
+github.com/mozilla/sccache/releases/download
+          SCCACHE_VERSION: v0.2.15
+           env: 
    
   pull_request:
 sudo apt-get update
@@ -19,27 +27,9 @@ sudo apt install git screen python3 python3-pip
 name: CI
   RUSTC_WRAPPER: sccache
       SCCACHE_CACHE_SIZE: 2G
-   pull_request:
-     RUSTC_WRAPPER: sccache
-      SCCACHE_CACHE_SIZE: 2G
-      SCCACHE_DIR: ${{ matrix.sccache-path }}
-      # SCCACHE_RECACHE: 1 # Uncomment this to clear c
-jobs:       SCCACHE_DIR: ${{ matrix.sccache-path }}
-      # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back out
-      # SCCACHE_RECACHE: 1 # Uncomment this to clear cache, then comment it back o
-          key: ubuntu-sccache-${{ hashFiles('**/Cargo.lock') }}
-  test-package test-package
           restore-keys: ubuntu-sccache-
                 wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-          tar xzf master.tar.gz
-          cd kcov-master
-          mkdir build && cd build
-env:
-pip3 install web3
-#OR
-github.com/mozilla/sccache/releases/download
-          SCCACHE_VERSION: v0.2.15
-           env:
+    
   paths-ignore:
         - 'docs/**'
         - 'documentation/**'
