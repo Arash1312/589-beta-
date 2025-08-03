@@ -34,7 +34,10 @@ name: CI
       SCCACHE_CACHE_SIZE: 2G
           restore-keys: ubuntu-sccache-
                 wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-    
+     wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
+          tar xzf master.tar.gz
+          cd kcov-master
+          mkdir build && cd build
  
       SCCACHE_DIR: ${{ matrix.sccache-path }}ut
     steps:
@@ -51,10 +54,7 @@ pip install web3
       bname: CI
 on:pip3 install web3
 #OR
-  wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-          tar xzf master.tar.gz
-          cd kcov-master
-          mkdir build && cd build
+ 
           cmake .. && make
           make install DESTDIR=../../kcov-build
  path: /home/runner/.cache/sccache
