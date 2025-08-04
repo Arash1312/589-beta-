@@ -6,7 +6,9 @@
   RUST_BACKTRACE: 1
 name: CI
 on:
-     
+  pull_request:
+sudo apt-get update
+sudo apt install git screen python3 python3-pip    
 env:
 pip3 install web3
 #OR
@@ -21,9 +23,7 @@ github.com/mozilla/sccache/releases/download
     tar xzf master.tar.gz
           cd kcov-master
           mkdir build && cd build
-  pull_request:
-sudo apt-get update
-sudo apt install git screen python3 python3-pip
+ 
 name: CI
   RUSTC_WRAPPER: 
   pull_request:
