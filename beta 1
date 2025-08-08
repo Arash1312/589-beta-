@@ -2,7 +2,13 @@
     env:
   paths-ignore:
         - 'docs/**'
-  
+  name: CI
+  RUSTC_WRAPPER: 
+  pull_request:
+sudo apt-get update
+sudo apt install git screen python3 python3-pip
+name: CI
+  RUSTC_WRAPPER: sccache
   RUST_BACKTRACE: 1
 name: CI
 on:
@@ -24,13 +30,7 @@ github.com/mozilla/sccache/releases/download
           cd kcov-master
           mkdir build && cd build
  
-name: CI
-  RUSTC_WRAPPER: 
-  pull_request:
-sudo apt-get update
-sudo apt install git screen python3 python3-pip
-name: CI
-  RUSTC_WRAPPER: sccache
+
       SCCACHE_CACHE_SIZE: 2G
           restore-keys: ubuntu-sccache-
                 wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
