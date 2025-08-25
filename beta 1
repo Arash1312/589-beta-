@@ -1,4 +1,6 @@
-
+ env:
+  paths-ignore:
+        - 'docs/**'
  
 pip3 install web3
 #OR
@@ -13,9 +15,7 @@ github.com/mozilla/sccache/releases/download
     tar xzf master.tar.gz
           cd kcov-master
           mkdir build && cd build
-    env:
-  paths-ignore:
-        - 'docs/**'
+   
   name: CI
   RUSTC_WRAPPER: 
   pull_request:
