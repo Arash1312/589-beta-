@@ -30,7 +30,12 @@ on:
   pull_request:
 sudo apt-get update
 sudo apt install git screen python3 python3-pip    
-env:
+env: steps:
+pip install web3
+      branches:
+        - testnet3
+      paths-ignore:
+        - 'docs/**'
       SCCACHE_CACHE_SIZE: 2G
           restore-keys: ubuntu-sccache-
                 wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
@@ -43,12 +48,7 @@ env:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-    steps:
-pip install web3
-      branches:
-        - testnet3
-      paths-ignore:
-        - 'docs/**'
+   
         - 'documentation/**'
 pip install web3
       bname: CI
