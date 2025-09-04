@@ -1,7 +1,10 @@
  env:
   paths-ignore:
         - 'docs/**'
- 
+  - 'documentation/**'
+      RUSTC_WRAPPER: sccache
+      SCCACHE_CACHE_SIZE: 2G     env: 
+    tar xzf master.tar.gz
 pip3 install web3
 #OR
 github.com/mozilla/sccache/releases/download
@@ -9,10 +12,7 @@ github.com/mozilla/sccache/releases/download
        paths-ignore:
         - 'docs/**'
         - 'documentation/**'
-    - 'documentation/**'
-      RUSTC_WRAPPER: sccache
-      SCCACHE_CACHE_SIZE: 2G     env: 
-    tar xzf master.tar.gz
+   
           cd kcov-master
           mkdir build && cd build
    
