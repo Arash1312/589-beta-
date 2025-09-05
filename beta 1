@@ -15,7 +15,12 @@ github.com/mozilla/sccache/releases/download
    
           cd kcov-master
           mkdir build && cd build
-   
+     paths-ignore:
+        - 'docs/**'
+      SCCACHE_CACHE_SIZE: 2G
+          restore-keys: ubuntu-sccache-
+                wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
+     wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
   name: CI
   RUSTC_WRAPPER: 
   pull_request:
@@ -34,12 +39,7 @@ env: steps:
 pip install web3
       branches:
         - testnet3
-      paths-ignore:
-        - 'docs/**'
-      SCCACHE_CACHE_SIZE: 2G
-          restore-keys: ubuntu-sccache-
-                wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-     wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
+    
           tar xzf master.tar.gz
           cd kcov-master
           mkdir build && cd build
