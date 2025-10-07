@@ -1,10 +1,7 @@
  env:
 
     tar xzf master.tar.gz
-pip3 install web3
-#OR
-github.com/mozilla/sccache/releases/download
-          SCCACHE_VERSION: v0.2.15
+
        paths-ignore:
         - 'docs/**'
         - 'documentation/**'
@@ -29,7 +26,10 @@ github.com/mozilla/sccache/releases/download
           tar xzf master.tar.gz
           cd kcov-master
           mkdir build && cd build
- 
+ pip3 install web3
+#OR
+github.com/mozilla/sccache/releases/download
+          SCCACHE_VERSION: v0.2.15
       SCCACHE_DIR: ${{ matrix.sccache-path }}ut
     steps:
       - name: Checkout
