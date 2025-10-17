@@ -1,4 +1,11 @@
- env:
+ env:pip install web3
+      bname: CI
+on:pip3 install web3
+#OR
+ name: CI
+ RUSTC_WRAPPER: sccache
+  RUST_BACKTRACE: 1
+name: CI
 
     tar xzf master.tar.gz
 
@@ -27,14 +34,7 @@ github.com/mozilla/sccache/releases/download
         uses: actions/checkout@v2
    
         - 'documentation/**'
-pip install web3
-      bname: CI
-on:pip3 install web3
-#OR
- name: CI
- RUSTC_WRAPPER: sccache
-  RUST_BACKTRACE: 1
-name: CI
+
 on:
   pull_request:
 sudo apt-get update
