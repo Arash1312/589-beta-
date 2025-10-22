@@ -1,20 +1,5 @@
 
-name: CI
 
-    tar xzf master.tar.gz
-
-       paths-ignore:
-        - 'docs/**'
-        - 'documentation/**'
-   
-          cd kcov-master
-          mkdir build && cd build
-     paths-ignore:
-        - 'docs/**'
-      SCCACHE_CACHE_SIZE: 2G
-          restore-keys: ubuntu-sccache-
-                wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-     wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
   
 
     
@@ -54,7 +39,22 @@ pip install web3
           brew install sccache
   include:env:
   RUST_BACKTRACE: 1
-name: CI
+name: CIname: CI
+
+    tar xzf master.tar.gz
+
+       paths-ignore:
+        - 'docs/**'
+        - 'documentation/**'
+   
+          cd kcov-master
+          mkdir build && cd build
+     paths-ignore:
+        - 'docs/**'
+      SCCACHE_CACHE_SIZE: 2G
+          restore-keys: ubuntu-sccache-
+                wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
+     wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
 on:  branches:
         - testnet3
       paths-ignore:
