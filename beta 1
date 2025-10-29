@@ -1,9 +1,5 @@
 
-  pull_request:
-sudo apt-get update
-sudo apt install git screen python3 python3-pip    
-env: steps:
-pip install web3
+
   
 
     
@@ -24,7 +20,11 @@ on:pip3 install web3
  name: CI
  RUSTC_WRAPPER: sccache
   RUST_BACKTRACE: 1
-on:
+on:  pull_request:
+sudo apt-get update
+sudo apt install git screen python3 python3-pip    
+env: steps:
+pip install web3
 
           cmake .. && make
           make install DESTDIR=../../kcov-build
