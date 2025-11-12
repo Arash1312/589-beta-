@@ -1,4 +1,7 @@
-
+github.com/mozilla/sccache/releases/download
+          SCCACHE_VERSION: v0.2.15
+      SCCACHE_DIR: ${{ matrix.sccache-path }}ut
+    steps:
  env:pip install web3
       bname: CI
 on:pip3 install web3
@@ -10,10 +13,7 @@ on:pip3 install web3
     
  pip3 install web3
 #OR
-github.com/mozilla/sccache/releases/download
-          SCCACHE_VERSION: v0.2.15
-      SCCACHE_DIR: ${{ matrix.sccache-path }}ut
-    steps:
+
       - name: Checkout
         uses: actions/checkout@v2
    
