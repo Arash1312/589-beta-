@@ -1,374 +1,158 @@
-github.com/mozilla/sccache/releases/download
-          SCCACHE_VERSION: v0.2.15
-      SCCACHE_DIR: ${{ matrix.sccache-path }}ut
-    steps:
- env:pip install web3
-      bname: CI
-on:pip3 install web3
-#OR
- name: CI
- RUSTC_WRAPPER: sccache
-  
+# auto-air-purifier
 
-    
- pip3 install web3
-#OR
+A simple, GitHub‑ready example project (in English) that automatically triggers home air purification every hour. This is a simulated controller written in Python, but you can later connect it to a real IoT device or API.
 
-      - name: Checkout
-        uses: actions/checkout@v2
-   
-        - 'documentation/**'
+---
 
-  RUST_BACKTRACE: 1
-on:  pull_request:
-sudo apt-get update
-sudo apt install git screen python3 python3-pip    
-env: steps:
-pip install web3
+## File Structure
 
-          cmake .. && make
-          make install DESTDIR=../../kcov-build
- path: /home/runner/.cache/sccache
-  paths-ignore:
-        - 'docs/**'
-        - 'documentation/**'
-        run: sccache --stop-server || true
-- name: Generate coverage report
-        run: |'macos-latest'
-        run: |
-          brew install sccache
-  include:env:
-  RUST_BACKTRACE: 1
-name: CIname: CI
+```
+auto-air-purifier/
+├─ README.md
+├─ purifier.py
+├─ scheduler.py
+├─ device_mock.py
+├─ requirements.txt
+└─ LICENSE
+```
 
-    tar xzf master.tar.gz
+---
 
-       paths-ignore:
-        - 'docs/**'
-        - 'documentation/**'
-   
-          cd kcov-master
-          mkdir build && cd build
-     paths-ignore:
-        - 'docs/**'
-      SCCACHE_CACHE_SIZE: 2G
-          restore-keys: ubuntu-sccache-
-                wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-     wget https://github.com/SimonKagstrom/kcov/archive/master.tar.gz
-on:  branches:
-        - testnet3
-      paths-ignore:
-        - 'docs/**'
-  - 'documentation/**'
-      RUSTC_WRAPPER: sccache
-      SCCACHE_CACHE_SIZE: 2G     env: 
-          tar xzf master.tar.gz
-          cd kcov-master
-          mkdir build && cd build
-  pull_re
-      name: CI
-  RUSTC_WRAPPER: 
-  pull_request:
-sudo apt-get update
-sudo apt install git screen python3 python3-pip
-  
-   - name: Stop sccache server
-      - name: Install Rust Stable
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-name: CIsudo apt-get update
+## README.md
 
-on:
-  pull_request:
-    push:
-      branches:
-        - testnet3
-      - name: Cache cargo registry
-        uses: actions/cache@v2
-        continue-on-error: false
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
-          pip3 install web3
-sudo apt install git screen python3 python3-pip
+````markdown
+# Auto Air Purifier Controller
 
-pip3 install web3
-#OR
-pip install web3
-      branches:
-        - testnet3
-      paths-ignore:
-        - 'docs/**'
-        - 'documentation/**'
-#OR
-pip install web3
-      branches:
-        - testnet3
-      paths-ignore:
-        - 'docs/**'
-        - 'documentat
-pip install web3
-      branches:
-        - testnet3
-      paths-ignore:
-        - 'docs/**'
-        - 'documentation/**'  
-      - name: Save sccache
-        uses: actions/cache@v2
-        continue-on-error: false
-        with:
-          path: ${{ matrix.sccache-path }}
-          key: ${{ runner.os }}-sccache-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-sccache-
-            
-      - name: Start sccache server
-        run: |
-          sccache --start-server
+This repository contains a simple Python-based automation controller that triggers air purification every hour. The example uses a mock device driver, but you can replace it with real IoT API calls (MQTT, REST, ZigBee, etc.).
 
-      - name: Test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --all
+## Features
+- Automatic air purification every hour
+- Manual trigger function
+- Logging of each purification cycle
+- Easy to extend to real device integrations
 
-      - name: Print sccache stats
-        run: sccache --show-stats
-        
-      - name: Stop sccache server
-        run: sccache --stop-server || true
+## Requirements
+- Python 3.8+
 
-  test-package-macos_m1:
-    name: Test Package macOS M1
-    runs-on: macos-latest
-    env:
-      RUSTC_WRAPPER: sccache
-      SCCACHE_CACHE_SIZE: 2G
-      SCCACHE_DIR: /Users/runner/Library/Caches/Mozilla.sccache
-    steps:
-      - name: Xcode Select
-        uses: devbotsxyz/xcode-select@v1.1.0
+Install dependencies:
+```bash
+pip install -r requirements.txt
+````
 
-      - name: Checkout
-        uses: actions/checkout@v2
+Run the controller:
 
-      - name: Install sccache
-        run: |
-          brew install sccache
-        
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          target: aarch64-apple-darwin
-          toolchain: stable
-          override: true
-          components: rustfmt
-sudo apt-get update
-sudo apt install git screen python3 python3-pip
+```bash
+python purifier.py
+```
 
-pip3 install web3
-#OR
-pip install web3
-      branches:
-        - testnet3
-      paths-ignore:
-        - 'docs/**'
-        - 'documentation/**'
-env:
-      - name: Cache cargo registry
-        uses: actions/cache@v2
-        continue-on-error: false
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-          key: m1-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            m1-cargo-
-            
-      - name: Save sccache
-        uses: actions/cache@v2
-        continue-on-error: false
-        with:
-          path: /Users/runner/Library/Caches/Mozilla.sccache
-          key: m1-sccache-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            m1-sccache-
-            
-      - name: Start sccache server
-        run: |
-          sccache --start-server
-          
-      - name: Test
-        run: |
-          SDKROOT=$(xcrun -sdk macosx11.1 --show-sdk-path) \
-          MACOSX_DEPLOYMENT_TARGET=$(xcrun -sdk macosx11.1 --show-sdk-platform-version) \
-          cargo test --all
+## License
 
-      - name: Print sccache stats
-        run: sccache --show-stats
-        
-      - name: Stop sccache server
-        run: sccache --stop-server || true
-   - os: ubuntu-latest
-            sccache-path: /home/runner/.cache/sccache
-          - os: macos-latest
-            sccache-path: /Users/runner/Library/Caches/Mozilla.sccache
-  test-package-windows:
-    name: Test Package Windows
-    runs-on: windows-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+MIT License
 
-      - name: Install Rust Stable
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
+```
+```
 
-      - name: Test
-        run: |
-          cargo test --all
-env:
-  RUST_BACKTRACE: 1
+---
 
-jobs:
-  test-package:
-    name: Test Package ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macOS-latest, ubuntu-latest]
-        include:
-  test-docs: 
-    name: Test Docs
-    runs-on: ubuntu-latest
-    env:
-      RUSTC_WRAPPER: sccache
-      SCCACHE_CACHE_SIZE: 2G
-      SCCACHE_DIR: /home/runner/.cache/sccache
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          ref: testnet3
+## purifier.py
 
-      - name: Install sccache
-        env:
-          LINK: https://github.com/mozilla/sccache/releases/download
-          SCCACHE_VERSION: v0.2.15
-        run: |
-          SCCACHE_FILE=sccache-$SCCACHE_VERSION-x86_64-unknown-linux-musl
-          mkdir -p $HOME/.local/bin
-          curl -L "$LINK/$SCCACHE_VERSION/$SCCACHE_FILE.tar.gz" | tar xz
-          mv -f $SCCACHE_FILE/sccache $HOME/.local/bin/sccache
-          chmod +x $HOME/.local/bin/sccache
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+```python
+#!/usr/bin/env python3
+"""
+Main hourly air purification controller.
+"""
+import time
+from scheduler import HourlyScheduler
+from device_mock import AirPurifierDevice
 
-      - name: Cache cargo registry
-        uses: actions/cache@v2
-        continue-on-error: false
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-
 
-      - name: Install Rust Stable
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
+def run_cycle(purifier: AirPurifierDevice):
+    print("[Controller] Starting air purification cycle...")
+    purifier.turn_on()
+    time.sleep(5)  # Simulated run time
+    purifier.turn_off()
+    print("[Controller] Purification cycle complete.\n")
 
-    RUST_BACKTRACE: 1
-name: CI
-on:pip3 install web3
-#OR
-:
-    name: Test Package ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macOS-latest, ubuntu-latest]
-      env: RUST_BACKTRACE: 1
-      - name: Checkout
-        uses: actions/checkout@v1
 
-      - name: Install sccache Ubuntu
-        env:
-          LINK: https://github.com/mozilla/sccache/releases/download
-          SCCACHE_VERSION: v0.2.15
-        run: |
-          SCCACHE_FILE=sccache-$SCCACHE_VERSION-x86_64-unknown-linux-musl
-          mkdir -p $HOME/.local/bin
-          curl -L "$LINK/$SCCACHE_VERSION/$SCCACHE_FILE.tar.gz" | tar xz
-          mv -f $SCCACHE_FILE/sccache $HOME/.local/bin/sccache
-          chmod +x $HOME/.local/bin/sccache
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-        
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
-          components: rustfmt
+def main():
+    purifier = AirPurifierDevice()
+    scheduler = HourlyScheduler(task=lambda: run_cycle(purifier))
 
-      - name: Cache cargo registry
-        uses: actions/cache@v2
-        continue-on-error: false
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-          key: codecov-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            codecov-cargo-
-            
-      - name: Save sccache
-        uses: actions/cache@v2
-        continue-on-error: false
-        with:
-          path: /Users/runner/Library/Caches/Mozilla.sccache
-          key: codecov-sccache-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            codecov-sccache-
-            
-      - name: Start sccache server
-        run: |
-          sccache --start-server
+    print("Auto Air Purifier Controller started. Running cycle every hour.")
+    try:
+        scheduler.start()
+    except KeyboardInterrupt:
+        print("\nShutting down controller...")
 
-      - name: Test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-          args: --all
-        env:
-          CARGO_INCREMENTAL: "0"
 
-      - name: Install dependencies for code coverage
-        run: |
-          sudo apt-get update
-          sudo apt-get -y install binutils-dev libcurl4-openssl-dev zlib1g-dev libdw-dev libiberty-dev
+if __name__ == "__main__":
+    main()
+```
 
-      branches:
-        - testnet3
-      paths-ignore:
-        - 'docs/**'
-        - 'documentation
-      paths-ignore:
-        - 'docs/**'
-        - 'documentation/**'
+---
+
+## scheduler.py
+
+```python
+"""
+A minimal hourly scheduler.
+"""
+import time
+import datetime
+
+class HourlyScheduler:
+    def __init__(self, task):
+        self.task = task
+
+    def start(self):
+        while True:
+            now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            print(f"[Scheduler] Running task at {now}")
+            self.task()
+            print("[Scheduler] Waiting 1 hour for next cycle...")
+            time.sleep(3600)  # 1 hour
+```
+
+---
+
+## device_mock.py
+
+```python
+"""
+Mock of an air purifier device. Replace with real hardware control.
+"""
+import time
+
+class AirPurifierDevice:
+    def turn_on(self):
+        print("[Device] Air purifier ON")
+
+    def turn_off(self):
+        print("[Device] Air purifier OFF")
+```
+
+---
+
+## requirements.txt
+
+```
+# No external libraries required
+```
+
+---
+
+## LICENSE (MIT)
+
+```text
+MIT License
+
+Copyright (c) 2025 Example
+```
+
+---
+
+## Notes
+
+* You can integrate real hardware using Home Assistant, MQTT, ESP32, or cloud APIs.
+* You can add sensors (CO₂, PM2.5, humidity, VOC) for intelligent filtering.
+* A web dashboard or mobile app can be added later.
