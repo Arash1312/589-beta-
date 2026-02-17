@@ -54,16 +54,7 @@ MIT License
 
 ---
 
-## purifier.py
 
-```python
-#!/usr/bin/env python3
-"""
-Main hourly air purification controller.
-"""
-import time
-from scheduler import HourlyScheduler
-from device_mock import AirPurifierDevice
 
 
 def run_cycle(purifier: AirPurifierDevice):
@@ -88,7 +79,16 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+## purifier.py
 
+```python
+#!/usr/bin/env python3
+"""
+Main hourly air purification controller.
+"""
+import time
+from scheduler import HourlyScheduler
+from device_mock import AirPurifierDevice
 ---
 
 ## scheduler.py
