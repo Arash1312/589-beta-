@@ -64,6 +64,7 @@ def run_cycle(purifier: AirPurifierDevice):
     purifier.turn_off()
     print("[Controller] Purification cycle complete.\n")
 
+This repository contains a simple Python-based automation controller that triggers air purification every hour. The example uses a mock device driver, but you can replace it with real IoT API calls (MQTT, REST, ZigBee, etc.).
 
 def main():
     purifier = AirPurifierDevice()
