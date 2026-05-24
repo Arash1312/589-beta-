@@ -23,13 +23,13 @@ auto-air-purifier/
 ````markdown
 # Auto Air Purifier Controller
 
-This repository contains a simple Python-based automation controller that triggers air purification every hour. The example uses a mock device driver, but you can replace it with real IoT API calls (MQTT, REST, ZigBee, etc.).
 
 ## Features
 - Automatic air purification every hour
 - Manual trigger function
 - Logging of each purification cycle
 - Easy to extend to real device integrations
+This repository contains a simple Python-based automation controller that triggers air purification every hour. The example uses a mock device driver, but you can replace it with real IoT API calls (MQTT, REST, ZigBee, etc.).
 
 ## Requirements
 - Python 3.8+
