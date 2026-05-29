@@ -1,159 +1,27 @@
-# auto-air-purifier
+import schedule
+import time
+import json
+from smart_gas_api import SmartGasValve
 
-A simple, GitHub‑ready example project (in English) that automatically triggers home air purification every hour. This is a simulated controller written in Python, but you can later connect it to a real IoT device or API.
-
----
-
-## File Structure
-
-```
-auto-air-purifier/
-├─ README.md
-├─ purifier.py
-├─ scheduler.py
-├─ device_mock.py
-├─ requirements.txt
-└─ LICENSE
-```
-
----
-
-## README.md
-
-````markdown
-# Auto Air Purifier Controller
-
-
-## Features
-- Automatic air purification every hour
-- Manual trigger function
-- Logging of each purification cycle
-- Easy to extend to real device integrations
-This repository contains a simple Python-based automation controller that triggers air purification every hour. The example uses a mock device driver, but you can replace it with real IoT API calls (MQTT, REST, ZigBee, etc.).
-
-## Requirements
-- Python 3.8+
-
-Install dependencies:
-```bash
-pip install -r requirements.txt
-````
-
-Run the controller:
-
-```bash
-python purifier.py
-```
-
-## License
-
-MIT License
-
-```
-```
-
----
-
-
-
-
-def run_cycle(purifier: AirPurifierDevice):
-    print("[Controller] Starting air purification cycle...")
-    purifier.turn_on()
-    time.sleep(5)  # Simulated run time
-    purifier.turn_off()
-    print("[Controller] Purification cycle complete.\n")
-
-This repository contains a simple Python-based automation controller that triggers air purification every hour. The example uses a mock device driver, but you can replace it with real IoT API calls (MQTT, REST, ZigBee, etc.).
+def load_config():
+    with open("config.json", "r") as f:
+        return json.load(f)
 
 def main():
-    purifier = AirPurifierDevice()
-    scheduler = HourlyScheduler(task=lambda: run_cycle(purifier))
+    cfg = load_config()
 
-    print("Auto Air Purifier Controller started. Running cycle every hour.")
-    try:
-        scheduler.start()
-    except KeyboardInterrupt:
-        print("\nShutting down controller...")
+    valve = SmartGasValve(
+        api_url=cfg["device_api"],
+        api_key=cfg["api_key"]
+    )
 
+    # schedule the shutdown time
+    schedule.every().day.at(cfg["off_time"]).do(valve.turn_off)
+    print(f"Scheduled gas valve OFF at {cfg['off_time']}")
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 if __name__ == "__main__":
     main()
-```
-## purifier.py
-
-```python
-#!/usr/bin/env python3
-"""
-Main hourly air purification controller.
-"""
-import time
-from scheduler import HourlyScheduler
-from device_mock import AirPurifierDevice
----
-
-## scheduler.py
-
-```python
-"""
-A minimal hourly scheduler.
-"""
-import time
-import datetime
-
-class HourlyScheduler:
-    def __init__(self, task):
-        self.task = task
-
-    def start(self):
-        while True:
-            now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            print(f"[Scheduler] Running task at {now}")
-            self.task()
-            print("[Scheduler] Waiting 1 hour for next cycle...")
-            time.sleep(3600)  # 1 hour
-```
-
----
-
-## device_mock.py
-
-```python
-"""
-Mock of an air purifier device. Replace with real hardware control.
-"""
-import time
-
-class AirPurifierDevice:
-    def turn_on(self):
-        print("[Device] Air purifier ON")
-
-    def turn_off(self):
-        print("[Device] Air purifier OFF")
-```
-
----
-
-## requirements.txt
-
-```
-# No external libraries required
-```
-
----
-
-## LICENSE (MIT)
-
-```text
-MIT License
-
-Copyright (c) 2025 Example
-```
-
----
-
-## Notes
-
-* You can integrate real hardware using Home Assistant, MQTT, ESP32, or cloud APIs.
-* You can add sensors (CO₂, PM2.5, humidity, VOC) for intelligent filtering.
-* A web dashboard or mobile app can be added later.
