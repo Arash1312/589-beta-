@@ -1,0 +1,44 @@
+# TaskForge
+
+## Overview
+
+TaskForge is an intelligent productivity automation tool designed for developers, students, and remote workers. It analyzes user activities, organizes project files, creates daily schedules, and generates progress summaries automatically.
+
+## Features
+
+* Smart file organization by type and project.
+* AI-generated daily task planning.
+* Work session tracking with focus timers.
+* Automatic project progress reports.
+* Cross-platform support (Windows, Linux, macOS).
+* Export reports to Markdown and PDF.
+* Git integration for tracking coding activity.
+
+## Technology Stack
+
+* Python 3.12+
+* SQLite
+* OpenAI API (optional)
+* Rich CLI
+* Typer
+* Pandas
+
+## Example Commands
+
+```bash
+taskforge organize
+taskforge plan
+taskforge focus 45
+taskforge report
+```
+
+## Future Roadmap
+
+* Team collaboration support
+* Cloud synchronization
+* VS Code extension
+* Mobile companion app
+
+## License
+
+MIT License
