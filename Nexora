@@ -1,0 +1,39 @@
+import os
+import shutil
+from pathlib import Path
+
+class Nexora:
+    def __init__(self, folder):
+        self.folder = Path(folder)
+
+    def organize_files(self):
+        categories = {
+            "Images": [".png", ".jpg", ".jpeg", ".gif"],
+            "Documents": [".pdf", ".docx", ".txt"],
+            "Videos": [".mp4", ".mkv", ".avi"],
+            "Archives": [".zip", ".rar", ".7z"]
+        }
+
+        for file in self.folder.iterdir():
+            if file.is_file():
+                moved = False
+
+                for category, extensions in categories.items():
+                    if file.suffix.lower() in extensions:
+                        target = self.folder / category
+                        target.mkdir(exist_ok=True)
+
+                        shutil.move(str(file), str(target / file.name))
+                        print(f"Moved: {file.name} -> {category}")
+                        moved = True
+                        break
+
+                if not moved:
+                    target = self.folder / "Others"
+                    target.mkdir(exist_ok=True)
+                    shutil.move(str(file), str(target / file.name))
+
+if __name__ == "__main__":
+    path = input("Enter folder path: ")
+    assistant = Nexora(path)
+    assistant.organize_files()
