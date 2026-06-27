@@ -32,6 +32,14 @@ class Nexora:
                     target = self.folder / "Others"
                     target.mkdir(exist_ok=True)
                     shutil.move(str(file), str(target / file.name))
+if choice == '1':
+    print(f"نتیجه: {add(num1, num2)}")
+elif choice == '2':
+    print(f"نتیجه: {subtract(num1, num2)}")
+elif choice == '3':
+    print(f"نتیجه: {multiply(num1, num2)}")
+
+    print(f"نتیجه: {divide(num1, num2)}")
 
 if __name__ == "__main__":
     path = input("Enter folder path: ")
