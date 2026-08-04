@@ -8,10 +8,7 @@ class Nexora:
 
     def organize_files(self):
         categories = {
-            "Images": [".png", ".jpg", ".jpeg", ".gif"],
-            "Documents": [".pdf", ".docx", ".txt"],
-            "Videos": [".mp4", ".mkv", ".avi"],
-            "Archives": [".zip", ".rar", ".7z"]
+            "Images": [".png", ".jpg", ".jpeg", ".gif"]
         }
 
         for file in self.folder.iterdir():
@@ -27,7 +24,9 @@ class Nexora:
                         print(f"Moved: {file.name} -> {category}")
                         moved = True
                         break
-
+"Documents": [".pdf", ".docx", ".txt"],
+            "Videos": [".mp4", ".mkv", ".avi"],
+            "Archives": [".zip", ".rar", ".7z"]
                 if not moved:
                     target = self.folder / "Others"
                     target.mkdir(exist_ok=True)
