@@ -1,46 +1,54 @@
-import os
-import shutil
+import hashlib
+import argparse
 from pathlib import Path
 
-class Nexora:
-    def __init__(self, folder):
-        self.folder = Path(folder)
 
-    def organize_files(self):
-        categories = {
-            "Images": [".png", ".jpg", ".jpeg", ".gif"]
-        }
+def hash_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
-        for file in self.folder.iterdir():
-            if file.is_file():
-                moved = False
 
-                for category, extensions in categories.items():
-                    if file.suffix.lower() in extensions:
-                        target = self.folder / category
-                        target.mkdir(exist_ok=True)
+def hash_file(file_path: str) -> str:
+    sha = hashlib.sha256()
 
-                        shutil.move(str(file), str(target / file.name))
-                        print(f"Moved: {file.name} -> {category}")
-                        moved = True
-                        break
-"Documents": [".pdf", ".docx", ".txt"],
-            "Videos": [".mp4", ".mkv", ".avi"],
-            "Archives": [".zip", ".rar", ".7z"]
-                if not moved:
-                    target = self.folder / "Others"
-                    target.mkdir(exist_ok=True)
-                    shutil.move(str(file), str(target / file.name))
-if choice == '1':
-    print(f"نتیجه: {add(num1, num2)}")
-elif choice == '2':
-    print(f"نتیجه: {subtract(num1, num2)}")
-elif choice == '3':
-    print(f"نتیجه: {multiply(num1, num2)}")
+    with open(file_path, "rb") as f:
+        while chunk := f.read(4096):
+            sha.update(chunk)
 
-    print(f"نتیجه: {divide(num1, num2)}")
+    return sha.hexdigest()
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="NovaHash - Fast SHA256 Hash Generator"
+    )
+
+    parser.add_argument(
+        "-t",
+        "--text",
+        help="Hash a text string"
+    )
+
+    parser.add_argument(
+        "-f",
+        "--file",
+        help="Hash a file"
+    )
+
+    args = parser.parse_args()
+
+    if args.text:
+        print(hash_text(args.text))
+    elif args.file:
+        path = Path(args.file)
+
+        if not path.exists():
+            print("Error: File not found.")
+            return
+
+        print(hash_file(str(path)))
+    else:
+        parser.print_help()
+
 
 if __name__ == "__main__":
-    path = input("Enter folder path: ")
-    assistant = Nexora(path)
-    assistant.organize_files()
+    main()
