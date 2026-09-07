@@ -1,0 +1,214 @@
+pulseforge/
+├── cmd/
+│   └── pulseforge/
+│       └── main.go
+├── internal/
+│   ├── checker/
+│   │   └── checker.go
+│   └── output/
+│       └── output.go
+├── go.mod
+├── README.md
+└── LICENSE
+module github.com/yourusername/pulseforge
+
+go 1.22
+package main
+
+import (
+	"flag"
+	"fmt"
+	"os"
+	"time"
+
+	"github.com/yourusername/pulseforge/internal/checker"
+	"github.com/yourusername/pulseforge/internal/output"
+)
+
+func main() {
+	target := flag.String("url", "", "Target URL to monitor")
+	timeout := flag.Duration("timeout", 10*time.Second, "Request timeout")
+	jsonOutput := flag.Bool("json", false, "Return results as JSON")
+
+	flag.Parse()
+
+	if *target == "" {
+		fmt.Fprintln(os.Stderr, "error: --url is required")
+		flag.Usage()
+		os.Exit(1)
+	}
+
+	result := checker.Run(*target, *timeout)
+
+	if *jsonOutput {
+		output.JSON(result)
+	} else {
+		output.Table(result)
+	}
+
+	if !result.Available {
+		os.Exit(2)
+	}
+}
+package checker
+
+import (
+	"net/http"
+	"time"
+)
+
+type Result struct {
+	URL        string        `json:"url"`
+	StatusCode int           `json:"status_code"`
+	Latency    time.Duration `json:"latency"`
+	Available  bool          `json:"available"`
+	Error      string        `json:"error,omitempty"`
+	Timestamp  time.Time     `json:"timestamp"`
+}
+
+func Run(url string, timeout time.Duration) Result {
+	client := &http.Client{
+		Timeout: timeout,
+	}
+
+	start := time.Now()
+
+	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		return Result{
+			URL:       url,
+			Available: false,
+			Error:     err.Error(),
+			Timestamp: time.Now(),
+		}
+	}
+
+	req.Header.Set("User-Agent", "PulseForge/1.0")
+
+	resp, err := client.Do(req)
+	latency := time.Since(start)
+
+	if err != nil {
+		return Result{
+			URL:       url,
+			Latency:   latency,
+			Available: false,
+			Error:     err.Error(),
+			Timestamp: time.Now(),
+		}
+	}
+
+	defer resp.Body.Close()
+
+	return Result{
+		URL:        url,
+		StatusCode: resp.StatusCode,
+		Latency:    latency,
+		Available:  resp.StatusCode >= 200 && resp.StatusCode < 500,
+		Timestamp:  time.Now(),
+	}
+}
+package output
+
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+
+	"github.com/yourusername/pulseforge/internal/checker"
+)
+
+func Table(result checker.Result) {
+	fmt.Println("────────────────────────────────────────")
+	fmt.Println(" PulseForge API Monitor")
+	fmt.Println("────────────────────────────────────────")
+	fmt.Printf("URL:        %s\n", result.URL)
+	fmt.Printf("Status:     %d\n", result.StatusCode)
+	fmt.Printf("Latency:    %s\n", result.Latency)
+	fmt.Printf("Available:  %t\n", result.Available)
+	fmt.Printf("Checked:    %s\n", result.Timestamp.Format("2006-01-02 15:04:05"))
+
+	if result.Error != "" {
+		fmt.Printf("Error:      %s\n", result.Error)
+	}
+
+	fmt.Println("────────────────────────────────────────")
+}
+
+func JSON(result checker.Result) {
+	encoder := json.NewEncoder(os.Stdout)
+	encoder.SetIndent("", "  ")
+
+	if err := encoder.Encode(result); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+	}
+}
+go run ./cmd/pulseforge --url https://example.com
+────────────────────────────────────────
+ PulseForge API Monitor
+────────────────────────────────────────
+URL:        https://example.com
+Status:     200
+Latency:    142.31ms
+Available:  true
+Checked:    2026-09-07 11:10:24
+────────────────────────────────────────
+go run ./cmd/pulseforge \
+  --url https://example.com \
+  --json
+# PulseForge
+
+PulseForge is a lightweight API availability and latency monitor built with Go.
+
+It provides a simple CLI for checking HTTP endpoints and returning structured
+results that can be consumed by scripts, CI pipelines, monitoring systems,
+and automation workflows.
+
+## Features
+
+- HTTP endpoint health checks
+- Configurable request timeout
+- Latency measurement
+- HTTP status inspection
+- JSON output for automation
+- Minimal dependencies
+- Fast startup
+- CI/CD friendly
+- Non-zero exit codes for failed checks
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/pulseforge.git
+cd pulseforge
+go build -o pulseforge ./cmd/pulseforge
+./pulseforge --url https://example.com
+./pulseforge \
+  --url https://example.com \
+  --timeout 5s
+./pulseforge \
+  --url https://example.com \
+  --json
+{
+  "url": "https://example.com",
+  "status_code": 200,
+  "latency": 142310000,
+  "available": true,
+  "timestamp": "2026-09-07T11:10:24Z"
+}
+CLI
+ │
+ ▼
+Checker
+ │
+ ├── HTTP Request
+ ├── Status Inspection
+ └── Latency Measurement
+ │
+ ▼
+Result
+ │
+ ├── Human-readable output
+ └── JSON output
